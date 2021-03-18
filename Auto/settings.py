@@ -39,9 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 ]
 
-SELF_APPS = ['core', 'monitor', 'control', 'data', 'api']
+SELF_APPS = [
+    'core',
+    'monitor',
+    'control',
+    'data',
+    'api',
+    'Agenda',
+]
 
-THIRD_APP = ['rest_framework', 'django_filters']
+THIRD_APP = ['rest_framework', 'django_filters', 'django_crontab']
 # THIRD_APP = []
 
 INSTALLED_APPS += SELF_APPS + THIRD_APP
@@ -86,6 +93,9 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+
+CRONJOBS = [('*/1 * * * *', 'Agenda.cron.teste'), ('*/1 * * * *', 'Agenda.cron.Execution')]
 
 
 # Password validation

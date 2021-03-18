@@ -35,7 +35,9 @@ class Rule(models.Model):
 class Action(models.Model):
     tag_action = models.CharField(max_length=100, null=True)
     actuator = models.ForeignKey(Actuator, on_delete=models.CASCADE, null=True)
-    new_status = models.CharField(max_length=100, null=True)
+    new_status = models.CharField(
+        max_length=100, null=True, verbose_name="Status (1-True; 0-False)"
+    )
     value = models.CharField(max_length=100, null=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
@@ -66,12 +68,12 @@ class RulesMonitorAdmin(admin.ModelAdmin):
     # filter_horizontal = ('actions',)
 
 
-class ScheduleAction(models.Model):
-    tag_schedule = models.CharField(max_length=100, null=True)
-    actuator = models.ForeignKey(Actuator, on_delete=models.CASCADE, null=True)
-    time_action = forms.DateTimeField(widget=AdminTimeWidget())
-    new_status = models.CharField(max_length=100, null=True)
-    time_value = models.CharField(max_length=100, null=True)
-    after_status = models.CharField(max_length=100, null=True)
-    date_created = models.DateTimeField(auto_now_add=True, null=True)
-    date_updated = models.DateTimeField(auto_now=True, null=True)
+# class ScheduleAction(models.Model):
+#     tag_schedule = models.CharField(max_length=100, null=True)
+#     actuator = models.ForeignKey(Actuator, on_delete=models.CASCADE, null=True)
+#     time_action = forms.DateTimeField(widget=AdminTimeWidget())
+#     new_status = models.CharField(max_length=100, null=True)
+#     time_value = models.CharField(max_length=100, null=True)
+#     after_status = models.CharField(max_length=100, null=True)
+#     date_created = models.DateTimeField(auto_now_add=True, null=True)
+#     date_updated = models.DateTimeField(auto_now=True, null=True)
