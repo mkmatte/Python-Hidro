@@ -38,7 +38,15 @@ class MicroController(models.Model):
     status = models.BooleanField(verbose_name='Controlador Ativo?', default=False)
 
     def __str__(self):
-        return self.model_controller + " : " + self.label_controller + " : " + self.description
+        return (
+            str(self.id)
+            + " : "
+            + self.model_controller
+            + " : "
+            + self.label_controller
+            + " : "
+            + self.description
+        )
 
 
 class Sensor(models.Model):

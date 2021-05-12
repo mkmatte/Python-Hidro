@@ -1,0 +1,103 @@
+from monitor.models import *
+from data.models import *
+from control.models import *
+
+
+def verificationMonitor(data_sensor):
+
+    allMonitor = RulesMonitor.objects.all()
+    for monitor in allMonitor:
+        rules = monitor.rules.all()
+        for rule in rules:
+            if rule.sensor.id == int(data_sensor['sensor']):
+                action = verificationRules(rules)
+                if action == True:
+                    actionActuators(monitor.actionsTrue.all())
+                else:
+                    actionActuators(monitor.actionsFalse.all())
+
+
+def verificationRules(rules):
+    action = True
+    for rule in rules:
+        datasensor = DataSensor.objects.filter(sensor=rule.sensor.id).last()
+        if rule.condition == str(1):
+            if float(datasensor.value) > float(rule.value):
+                action = action and True
+            else:
+                action = action and False
+        elif rule.condition == str(2):
+            if float(datasensor.value) >= float(rule.value):
+                action = action and True
+            else:
+                action = action and False
+        elif rule.condition == str(3):
+            if float(datasensor.value) < float(rule.value):
+                action = action and True
+            else:
+                action = action and False
+        elif rule.condition == str(4):
+            if float(datasensor.value) <= float(rule.value):
+                action = action and True
+            else:
+                action = action and False
+        elif rule.condition == str(5):  # =
+            if datasensor.value == "True" or datasensor.value == "False":
+                if datasensor.value == rule.value:
+                    action = action and True
+                else:
+                    action = action and False
+            else:
+                if float(datasensor.value) == float(rule.value):
+                    action = action and True
+                else:
+                    action = action and False
+        elif rule.condition == str(6):
+            if datasensor.value == "True" or datasensor.value == "False":
+                if datasensor.value != rule.value:
+                    action = action and True
+                else:
+                    action = action and False
+            else:
+                if float(datasensor.value) != float(rule.value):
+                    action = action and True
+                else:
+                    action = action and False
+    return action
+
+
+def actionActuators(actions):
+    import json
+
+    for action in actions:
+        print(action.actuator.controller.mac)
+        ip_address = RegisterController.objects.filter(
+            mac_address=action.actuator.controller.mac
+        ).last()
+        print(action)
+        print("Controller:" + str(action.actuator.controller.id))
+        print("ID Actuator: " + str(action.actuator.id))
+        data = {}
+        data['controller'] = action.actuator.controller.id
+        data['actuator'] = action.actuator.id
+        data['value'] = action.value
+        data_test = "{\"control_on\":\"True\", \"control_off\":\"True\"}"
+        data.update(json.loads(action.data))
+
+        # data["date_created"] = datetime.datetime.now()
+        json = json.dumps(data, indent=4)
+        broker = '192.168.100.25'
+        port = 1883
+        topic = str(data['controller'])
+        client_id = f'server'
+
+        import paho.mqtt.client as paho
+
+        def on_publish(client, userdata, result):  # create function for callback
+            print("data published \n")
+            pass
+
+        client1 = paho.Client("control1")  # create client object
+        client1.on_publish = on_publish  # assign function to callback
+        client1.connect(broker, port)  # establish connection
+        client1.publish(topic, json)

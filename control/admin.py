@@ -6,3 +6,4 @@ from .models import *
 admin.site.register(DataActuador)
 admin.site.register(DataSensor)
 admin.site.register(RegisterController)
+admin.site.register(Log)
