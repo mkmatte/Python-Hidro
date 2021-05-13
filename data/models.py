@@ -57,6 +57,7 @@ class Sensor(models.Model):
     description = models.TextField(max_length=2000, null=True)
     port_sensor = models.CharField(max_length=100, null=True)
     description_port = models.TextField(max_length=2000, null=True)
+    send_message = models.BooleanField(verbose_name='Monitorar via Telegram?', default=False)
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
 
@@ -93,6 +94,7 @@ class Actuator(models.Model):
     port_actuator = models.CharField(max_length=100, null=True)
     description_port = models.TextField(max_length=2000, null=True)
     active_status = models.BooleanField(default=False)
+    send_message = models.BooleanField(verbose_name='Monitorar via Telegram?', default=False)
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
 

@@ -95,9 +95,41 @@ def actionActuators(actions):
 
         def on_publish(client, userdata, result):  # create function for callback
             print("data published \n")
+            # print(userdata)
             pass
 
         client1 = paho.Client("control1")  # create client object
         client1.on_publish = on_publish  # assign function to callback
         client1.connect(broker, port)  # establish connection
         client1.publish(topic, json)
+        print(json)
+
+
+def telegram_message(msg):
+    import requests
+
+    token = "1847502844:AAFX6i9t5g0Gdv3NQfeqyFR6xf1YKruHic0"
+    group_id = "-552068730"
+    url = (
+        "https://api.telegram.org/bot"
+        + str(token)
+        + "/sendMessage?chat_id="
+        + str(group_id)
+        + "&text="
+        + str(msg)
+    )
+    requests.post(url)
+
+
+def notification_sensor_telegram(data):
+    datasensor = Sensor.objects.filter(id=data['sensor']).last()
+    print(datasensor)
+    if datasensor.send_message == True:
+        telegram_message(data)
+
+
+def notification_actuator_telegram(data):
+    dataactuator = Actuator.objects.filter(id=data['actuator']).last()
+    print(dataactuator)
+    if dataactuator.send_message == True:
+        telegram_message(data)

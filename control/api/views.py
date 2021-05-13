@@ -3,6 +3,8 @@ from django.http import HttpResponse
 from rest_framework import viewsets
 from control.models import *
 from control.monitor import verificationMonitor
+from control.monitor import telegram_message
+from control.monitor import notification_sensor_telegram, notification_actuator_telegram
 from monitor.models import *
 from data.models import *
 from control.models import *
@@ -43,6 +45,8 @@ class SensorViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Gen
     def post(self, request, *args, **kwargs):
         new_data_sensor = self.create(request, *args, **kwargs)
         verificationMonitor(request.data)
+        notification_sensor_telegram(request.data)
+        # telegram_message(request.data)
         return new_data_sensor
 
 
@@ -51,6 +55,7 @@ class ActuatorViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, generics.G
     serializer_class = DataActuatorSerializer
 
     def post(self, request, *args, **kwargs):
+        notification_actuator_telegram(request.data)
         return self.create(request, *args, **kwargs)
 
 
@@ -72,4 +77,5 @@ class LogViewSet(mixins.ListModelMixin, mixins.CreateModelMixin, generics.Generi
     serializer_class = LogSerializer
 
     def post(self, request, *args, **kwargs):
+        telegram_message(request.data)
         return self.create(request, *args, **kwargs)

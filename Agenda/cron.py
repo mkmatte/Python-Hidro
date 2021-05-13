@@ -12,10 +12,12 @@ def Execution():
     now = datetime.now()
     for schedule in allSchedule:
         if croniter.match(schedule.start, now):
-            arquivo.write(schedule.tag_schedule + " - True - " + str(now) + "\n")
-            actionActuators(schedule.actions_start)
+            print("Agenda 0")
+            arquivo.write(schedule.tag_schedule + " 2- True - " + str(now) + "\n")
+            print("Agenda 1")
+            actionActuators(schedule.actions_start.all())
 
         if croniter.match(schedule.end, now):
-            arquivo.write(schedule.tag_schedule + " - False - " + str(now) + "\n")
-            actionActuators(schedule.actions_end)
+            arquivo.write(schedule.tag_schedule + " - 2 False - " + str(now) + "\n")
+            actionActuators(schedule.actions_end.all())
     arquivo.close()
