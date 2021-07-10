@@ -63,7 +63,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'Auto.urls'
-
+DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -88,13 +88,12 @@ WSGI_APPLICATION = 'Auto.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.sqlite3', 
+        'NAME': BASE_DIR / 'sqlite3',    }
 }
 
 
-CRONJOBS = [('*/1 * * * *', 'Agenda.cron.teste'), ('*/1 * * * *', 'Agenda.cron.Execution')]
+CRONJOBS = [('*/1 * * * *', 'Agenda.cron.Execution', '>> /home/pi/Documents/agenda_cron.log')]
 
 
 # Password validation
@@ -136,3 +135,5 @@ USE_TZ = False
 STATIC_URL = '/static/'
 
 ALLOWED_HOSTS = ['*']
+
+CRONTAB_COMMAND_SUFFIX = '2>&1'

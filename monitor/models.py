@@ -35,8 +35,8 @@ class Rule(models.Model):
 class Action(models.Model):
     tag_action = models.CharField(max_length=100, null=True)
     actuator = models.ForeignKey(Actuator, on_delete=models.CASCADE, null=True)
-    data = models.CharField(max_length=200, null=True, verbose_name="Data in Json Format")
-    value = models.CharField(max_length=100, null=True)
+    data = models.CharField(max_length=200, null=True, blank= True, verbose_name="Data in Json Format")
+    value = models.CharField(max_length=100, null=True, blank=True)
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
 

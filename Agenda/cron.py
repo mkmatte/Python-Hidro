@@ -5,7 +5,7 @@ from control.monitor import actionActuators
 
 
 def Execution():
-    arquivo = open("/home/saac/Documents/Agenda.log", "a")
+    arquivo = open("/home/pi/Documents/Agenda.log", "a")
 
     # arquivo.write("Cron - ")
     allSchedule = Schedule.objects.all()
@@ -16,8 +16,9 @@ def Execution():
             arquivo.write(schedule.tag_schedule + " 2- True - " + str(now) + "\n")
             print("Agenda 1")
             actionActuators(schedule.actions_start.all())
+	  
 
-        if croniter.match(schedule.end, now):
-            arquivo.write(schedule.tag_schedule + " - 2 False - " + str(now) + "\n")
-            actionActuators(schedule.actions_end.all())
+#        if croniter.match(schedule.end, now):
+#            arquivo.write(schedule.tag_schedule + " - 2 False - " + str(now) + "\n")
+#            actionActuators(schedule.actions_end.all())
     arquivo.close()

@@ -80,13 +80,13 @@ def actionActuators(actions):
         data = {}
         data['controller'] = action.actuator.controller.id
         data['actuator'] = action.actuator.id
-        data['value'] = action.value
-        data_test = "{\"control_on\":\"True\", \"control_off\":\"True\"}"
-        data.update(json.loads(action.data))
+        if not action.value is None: data['value'] = action.value
+        #data_test = "{\"control_on\":\"True\", \"control_off\":\"True\"}"
+        if not action.data is None: data.update(json.loads(action.data))
 
         # data["date_created"] = datetime.datetime.now()
         json = json.dumps(data, indent=4)
-        broker = '192.168.100.25'
+        broker = '192.168.100.100'
         port = 1883
         topic = str(data['controller'])
         client_id = f'server'
