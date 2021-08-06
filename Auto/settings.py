@@ -64,10 +64,11 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'Auto.urls'
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [BASE_DIR / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -93,7 +94,9 @@ DATABASES = {
 }
 
 
-CRONJOBS = [('*/1 * * * *', 'Agenda.cron.Execution', '>> /home/pi/Documents/agenda_cron.log')]
+CRONJOBS = [('*/1 * * * *', 'Agenda.cron.Execution', '>> /home/saac/Documents/agenda_cron.log'),
+            ('*/5 * * * *', 'control.monitor.verification_controller', '>> /home/saac/Documents/controller.log')
+]
 
 
 # Password validation

@@ -1,6 +1,8 @@
 from monitor.models import *
 from data.models import *
 from control.models import *
+import subprocess
+import platform    # For getting the operating system name
 
 
 def verificationMonitor(data_sensor):
@@ -133,3 +135,34 @@ def notification_actuator_telegram(data):
     print(dataactuator)
     if dataactuator.send_message == True:
         telegram_message(data)
+
+
+def verification_controller():
+    controllers = MicroController.objects.all()
+    for c in controllers:
+        try:
+            rc = RegisterController.objects.filter(controller=c).last()
+            if rc == None: continue
+            if rc.controller.status == True:    
+                situation = ping(rc.ip_address)
+                if situation == False:
+                    msg = rc.controller.label_controller +" : "+ rc.ip_address + ": Não está respondo, acorda aquele priguiçoso..."
+                    telegram_message(msg)
+        except:
+            pass
+
+
+
+def ping(host):
+    """
+    Returns True if host (str) responds to a ping request.
+    Remember that a host may not respond to a ping (ICMP) request even if the host name is valid.
+    """
+
+    # Option for the number of packets as a function of
+    param = '-n' if platform.system().lower()=='windows' else '-c'
+
+    # Building the command. Ex: "ping -c 1 google.com"
+    command = ['ping', param, '4', host]
+
+    return subprocess.call(command) == 0    

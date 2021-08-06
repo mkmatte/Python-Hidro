@@ -1,0 +1,29 @@
+{% extends 'menu.html'%}
+
+{% block content %}
+    
+        {% if exec %}
+            <h5> Ação Executada com Sucesso</h5> <br>  <br>
+        {% endif %}
+        
+        {% for action in actions %}  
+               
+            <div class="ac_box">
+                <div class="ac_box_top"><div>
+                    <div class="ac_box_cont">
+                        id: {{ action.id }}<br>
+                        Nome: {{ action.tag_action }}<br>
+                        Microcontrolador: {{ action.actuator.controller.label_controller }}<br>
+                        Json Data: {{ action.data }}<br>
+                        Valor: {{ action.value }}<br>
+                        <form action="" method="post">
+                            {% csrf_token %} 
+                            <button type="submit" class="btn btn-success" role="link" name="id" value={{ action.id }}>Executar Ação</button>
+                        </form>
+                        ----------------------------------------------------------------
+                        <br>
+                    <div>
+            <div>
+        {% endfor %}
+    
+{% endblock %}

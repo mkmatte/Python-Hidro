@@ -41,6 +41,7 @@ class DataActuador(models.Model):
     actuator = models.ForeignKey(Actuator, null=True, on_delete=models.SET_NULL)
     active_status = models.BooleanField(default=False)
     value = models.CharField(max_length=100, null=True)
+    data_type = models.CharField(max_length=100, null=True)
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
 

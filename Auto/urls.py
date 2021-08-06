@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework import routers
+from . import views
 
 # from api.views import DataSensorViewSet
 
@@ -24,7 +25,11 @@ from rest_framework import routers
 # router.register('DataSensor', DataSensorViewSet)
 
 urlpatterns = [
+    path('', views.index),
+    path('home', views.index),
+    path('data/', include('control.urls'), name="data"),
     path('admin/', admin.site.urls),
+    path('monitor/', include('monitor.urls'), name="monitor"),
     # path('', include('core.urls')),
     # path('data', include('data.urls')),
     # path('monitor', include('monitor.urls')),

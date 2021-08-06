@@ -1,0 +1,10 @@
+{% extends 'menu.html'%}
+
+
+{% block content %}
+  {% for chart in graphs %}
+     <img src="data:image/png;base64,{{chart|safe}}">
+  {% endfor %}
+
+
+{% endblock %}

@@ -9,7 +9,9 @@ class Project(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     status = models.BooleanField(default=False)
-
+    class Meta:
+         verbose_name = "Projeto"
+         verbose_name_plural = "1 - Projeto"
     def __str__(self):
         return self.name_project + " : " + self.description
 
@@ -21,7 +23,11 @@ class Sector(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     status = models.BooleanField(default=False)
-
+    
+    class Meta:
+         verbose_name = "Setor"
+         verbose_name_plural = "2 - Setor"
+    
     def __str__(self):
         return self.name_sector + " : " + self.description
 
@@ -36,7 +42,11 @@ class MicroController(models.Model):
     date_created = models.DateTimeField(auto_now_add=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
     status = models.BooleanField(verbose_name='Controlador Ativo?', default=False)
-
+    
+    class Meta:
+         verbose_name = "Microcontrolador"
+         verbose_name_plural = "3 - Microcontrolador"
+    
     def __str__(self):
         return (
             str(self.id)
@@ -61,6 +71,11 @@ class Sensor(models.Model):
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
 
+
+    class Meta:
+         verbose_name = "Sensor"
+         verbose_name_plural = "4 - Sensor"
+
     def __str__(self):
         return (
             str(self.id)
@@ -73,16 +88,20 @@ class Sensor(models.Model):
         )
 
 
-class SensorConfiguration(models.Model):
-    tag_config_sensor = models.CharField(max_length=100, null=True)
-    sensor = models.ForeignKey(Sensor, null=True, on_delete=models.SET_NULL)
-    status = models.CharField(max_length=100, null=True)
-    time_read_sensor = models.CharField(max_length=100, null=True)
-    date_created = models.DateTimeField(auto_now=True, null=True)
-    date_updated = models.DateTimeField(auto_now=True, null=True)
-
-    def __str__(self):
-        return self.tag_config_sensor
+# class SensorConfiguration(models.Model):
+#     tag_config_sensor = models.CharField(max_length=100, null=True)
+#     sensor = models.ForeignKey(Sensor, null=True, on_delete=models.SET_NULL)
+#     status = models.CharField(max_length=100, null=True)
+#     time_read_sensor = models.CharField(max_length=100, null=True)
+#     date_created = models.DateTimeField(auto_now=True, null=True)
+#     date_updated = models.DateTimeField(auto_now=True, null=True)
+    
+#     class Meta:
+#          verbose_name = "Configurações do Sensor"
+#          verbose_name_plural = "5 - Configurações do Sensor"
+    
+#     def __str__(self):
+#         return self.tag_config_sensor
 
 
 class Actuator(models.Model):
@@ -98,6 +117,10 @@ class Actuator(models.Model):
     date_created = models.DateTimeField(auto_now=True, null=True)
     date_updated = models.DateTimeField(auto_now=True, null=True)
 
+    class Meta:
+         verbose_name = "Atuador"
+         verbose_name_plural = "5 - Atuador"
+
     def __str__(self):
         return (
             str(self.id)
@@ -110,13 +133,17 @@ class Actuator(models.Model):
         )
 
 
-class ActuatorConfiguration(models.Model):
-    tag_config_actuator = models.CharField(max_length=100, null=True)
-    actuator = models.ForeignKey(Actuator, null=True, on_delete=models.SET_NULL)
-    status = models.CharField(max_length=100, null=True)
-    # time_read_sensor = models.CharField(max_length=100, null=True)
-    date_created = models.DateTimeField(auto_now=True, null=True)
-    date_updated = models.DateTimeField(auto_now=True, null=True)
-
-    def __str__(self):
-        return self.tag_config_actuator
+# class ActuatorConfiguration(models.Model):
+#     tag_config_actuator = models.CharField(max_length=100, null=True)
+#     actuator = models.ForeignKey(Actuator, null=True, on_delete=models.SET_NULL)
+#     status = models.CharField(max_length=100, null=True)
+#     # time_read_sensor = models.CharField(max_length=100, null=True)
+#     date_created = models.DateTimeField(auto_now=True, null=True)
+#     date_updated = models.DateTimeField(auto_now=True, null=True)
+    
+#     class Meta:
+#          verbose_name = "Configurações do Atuador"
+#          verbose_name_plural = "7 - Configurações do Atuador"
+    
+#     def __str__(self):
+#         return self.tag_config_actuator
