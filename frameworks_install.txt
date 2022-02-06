@@ -1,5 +1,10 @@
 pip install djangorestframework
 pip install markdown
 pip install django-filter
+
+
 pip install django-crontab
+python manage.py crontab add
+python manage.py crontab show #mostrar os cron cadastrados
+
 pip install matplotlib
