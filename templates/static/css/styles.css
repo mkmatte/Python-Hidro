@@ -126,12 +126,30 @@ body {
 }
 
 .rodape {
+    display: flex;
     padding: 32px;
     border-top: 0.4px solid #363635;
+
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
 }
 
 .rodape-imagem {
   height: 120px;
-  display: block;
-  margin: 0 auto;
+}
+
+.rodape-secundario {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+
+}
+
+.rodape-secundario-paragrafo {
+  font-family: 'Sarala', sans-serif;
+  font-weight: 300;
+  font-size: 30px;
+  color: #0c0c0c;
 }
