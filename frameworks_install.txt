@@ -8,3 +8,6 @@ python manage.py crontab add
 python manage.py crontab show #mostrar os cron cadastrados
 
 pip install matplotlib
+
+sudo apt-get install mosquitto
+sudo apt-get install mosquitto-clients
