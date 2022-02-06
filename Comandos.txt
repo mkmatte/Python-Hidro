@@ -1,4 +1,4 @@
 Comandos
 
 mosquitto_pub -h localhost -t 1 -m "{\"controller\":3\"actuator\":3,\",\"time_max_off\":60}"
-mosquitto_sub -t "1"   #canal
+mosquitto_sub -t "1"   #canal a
