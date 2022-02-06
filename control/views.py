@@ -17,7 +17,7 @@ def data_sensor(request):
     sensor = Sensor.objects.all()
     for s in sensor:
         try:
-            qs = DataSensor.objects.filter(sensor=s.id)[:30]
+            qs = DataSensor.objects.filter(sensor=s.id).order_by('-id')[:30]
         except:
             qs = DataSensor.objects.filter(sensor=s.id)
         list_of_datetimes = [x.date_created for x in qs]
@@ -34,7 +34,7 @@ def data_actuator(request):
     actuator = Actuator.objects.all()
     for s in actuator:
         try:
-            qs = DataActuador.objects.filter(actuator=s.id)[:20]
+            qs = DataActuador.objects.filter(actuator=s.id).order_by('-id')[:20]
         except:
             qs = DataActuador.objects.filter(actuator=s.id)
         list_of_datetimes = [x.date_created for x in qs]

@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.contrib.admin.widgets import FilteredSelectMultiple
 from django import forms
-from django.utils.translation import ugettext_lazy as _
+#from django.utils.translation import ugettext_lazy as _
 
 # Register your models here.
 
