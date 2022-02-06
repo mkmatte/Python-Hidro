@@ -30,11 +30,6 @@ urlpatterns = [
     path('data/', include('control.urls'), name="data"),
     path('admin/', admin.site.urls),
     path('monitor/', include('monitor.urls'), name="monitor"),
-    # path('', include('core.urls')),
-    # path('data', include('data.urls')),
-    # path('monitor', include('monitor.urls')),
-    # path('control', include('control.urls')),
     path('sensor', include('control.api.urls')),
     path('api_', include('control.api.urls')),
-    # path('datasensor', include(router.urls)),
 ]

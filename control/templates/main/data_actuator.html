@@ -1,10 +1,11 @@
-{% extends 'menu.html'%}
-
+{% extends 'base.html'%}
 
 {% block content %}
+<main class="conteudo">
   {% for chart in graphs %}
-     <img src="data:image/png;base64,{{chart|safe}}">
+  <section class="conteudo-principal">
+     <img class="conteudo-principal-imagem" src="data:image/png;base64,{{chart|safe}}">
+  </section>
   {% endfor %}
-
-
+</main> 
 {% endblock %}
