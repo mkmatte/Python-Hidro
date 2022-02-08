@@ -1,12 +1,36 @@
 {% extends 'base.html'%}
 
-
 {% block content %}
 <main class="conteudo">
-  {% for chart in graphs %}
-  <section class="conteudo-principal">
-     <img class="conteudo-principal-imagem" src="data:image/png;base64,{{chart|safe}}">
-  </section>
+  {% for dados in all_dados %}
+    {% for chart, qs, tag in dados %}
+      <section class="border-section conteudo">
+        <section class="conteudo-principal">
+            <img class="conteudo-principal-imagem" src="data:image/png;base64,{{chart|safe}}">
+        </section>
+        <section class="conteudo-principal">
+          <table>
+            <tr>
+              <th>Data</th>
+              <th>Controlador</th>
+              <th>Sensor</th>
+              <th>Valor</th>
+              <th>Tipo de Dado</th>
+            </tr>
+            {% for q in qs %}
+              <tr>
+                <td>{{q.date_created}}</td>
+                <td>{{q.controller.id}}</td>
+                <td>{{q.sensor.id}}</td>
+                <td>{{q.value}}</td>
+                <td>{{q.data_type}}</td>
+              </tr>
+            {% endfor %}
+          </table>
+        </section>
+      </section> 
+
+    {% endfor %}
   {% endfor %}
 </main> 
 {% endblock %}

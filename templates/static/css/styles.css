@@ -44,8 +44,12 @@ body {
 }
 
 .conteudo {
+  display: flex;
+  flex-direction: column;
   margin-bottom: 48px;
   border-top: 0.4px solid #363635;
+  justify-content: space-around;
+
 }
 
 .conteudo-principal {
@@ -53,6 +57,7 @@ body {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+  padding: 24px;
 }
 
 .conteudo-principal-escrito {
@@ -123,6 +128,11 @@ body {
   font-weight: 300;
   font-size: 18px;
   color: #ECD6C4;
+}
+
+.border-section {
+  border-top: 0.4px solid #363635;
+  border-bottom: 0.4px solid #363635;
 }
 
 .rodape {
