@@ -60,6 +60,15 @@ body {
   padding: 24px;
 }
 
+.conteudo-interno {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 48px;
+  border-top: 0.4px solid #363635;
+  justify-content: space-around;
+
+}
+
 .conteudo-principal-escrito {
   display: flex;
   flex-direction: column;

@@ -4,7 +4,7 @@
 <main class="conteudo">
   {% for dados in all_dados %}
     {% for chart, qs, tag in dados %}
-      <section class="border-section conteudo">
+      <section class="border-section conteudo-interno">
         <section class="conteudo-principal">
             <img class="conteudo-principal-imagem" src="data:image/png;base64,{{chart|safe}}">
         </section>
