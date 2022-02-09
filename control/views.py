@@ -13,12 +13,13 @@ class form_Project(forms.Form):
         
 
 def data_sensor(request):
-    graphs = []
-    dados=[]
-    tag_sensor = []
+   
     all_dados = []
     sensor = Sensor.objects.all()
     for s in sensor:
+        graphs = []
+        dados=[]
+        tag_sensor = []
         try:
             qs = DataSensor.objects.filter(sensor=s.id).order_by('-id')[:30]
         except:
@@ -33,16 +34,18 @@ def data_sensor(request):
         q = qs[0]
         tag_sensor.append(q.sensor.tag_sensor)
         all_dados.append(zip(graphs,dados,tag_sensor))
+    print(len(all_dados))
     return render(request,"main/data_sensor.html",{'all_dados':all_dados})
 
 
 def data_actuator(request):
-    graphs = []
-    dados=[]
-    tag_actuator = []
+
     all_dados = []
     actuator = Actuator.objects.all()
     for s in actuator:
+        graphs = []
+        dados=[]
+        tag_actuator = []
         try:
             qs = DataActuador.objects.filter(actuator=s.id).order_by('-id')[:20]
         except:
@@ -57,6 +60,7 @@ def data_actuator(request):
         q = qs[0]
         tag_actuator.append(q.actuator.tag_actuator)
         all_dados.append(zip(graphs,dados,tag_actuator))
+        
     return render(request,"main/data_actuator.html",{'all_dados':all_dados})    
     
     
