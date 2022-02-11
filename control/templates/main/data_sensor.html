@@ -18,10 +18,12 @@
   {% for dados in all_dados %}
     {% for chart, qs, tag in dados %}
       <section class="border-section conteudo-interno">
+        
         <section class="conteudo-principal">
-            <img class="conteudo-principal-imagem" src="data:image/png;base64,{{chart|safe}}">
+            <img class="conteudo-principal-imagem" src ="data:image/png;base64,{{chart|safe}}" style='width:100%; height:auto;'>
         </section>
-          <section class="conteudo-principal">
+        
+        <section class="conteudo-principal">
             <table>
               <tr>
                 <th>Data</th>

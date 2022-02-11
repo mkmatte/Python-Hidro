@@ -33,7 +33,7 @@ body {
   font-family: 'Sarala', sans-serif;
   color: #050301;
   font-weight: 400;
-  font-size: 18px
+  font-size: 12px
 }
 
 .cabecalho-menu-item:hover {
@@ -62,14 +62,17 @@ body {
 
 .conteudo-interno {
   display: flex;
-  flex-direction: row;
+  flex-direction: row  ;
   margin-bottom: 48px;
   border-top: 0.4px solid #363635;
   justify-content: space-around;
   align-items: center;
-  
-
 }
+
+@media (max-width: 800px) {
+  .conteudo-interno {
+    flex-direction: column;
+  }
 
 .conteudo-principal-escrito {
   display: flex;
@@ -171,6 +174,7 @@ body {
 .rodape-secundario-paragrafo {
   font-family: 'Sarala', sans-serif;
   font-weight: 300;
-  font-size: 30px;
+  font-size: 12px auto;
   color: #0c0c0c;
 }
+
