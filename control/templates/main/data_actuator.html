@@ -2,6 +2,21 @@
 
 {% block content %}
 <main class="conteudo">
+  <section class="conteudo-interno">
+  
+    <form action="" method="post">
+      <label for="projetos"><h3> O Projeto a ser Visualizado:</h3></label>
+      <select name="projeto" id="projeto">
+        {% for p in projetos %}
+          <option value={{p.id}}>{{p.name_project}}</option>
+        {% endfor %}
+      </select>    
+        {% csrf_token %} 
+        <button type="submit" class="btn btn-success" role="link" name="id" value=projeto>Mostrar Somente</button>
+  </form>
+  </section>
+
+
   {% for dados in all_dados %}
   {% for chart, qs, tag in dados %}
      <section class="border-section conteudo-interno">
@@ -12,18 +27,18 @@
         <table>
           <tr>
             <th>Data</th>
-            <th>Controlador</th>
-            <th>Atuador</th>
+          <!--  <th>Controlador</th>
+            <th>Atuador</th> -->
             <th>Valor</th>
-            <th>Tipo de Dado</th>
+            <!--<th>Tipo de Dado</th>-->
           </tr>
           {% for q in qs %}
             <tr>
               <td>{{q.date_created}}</td>
-              <td>{{q.controller.id}}</td>
-              <td>{{q.actuator.id}}</td>
-              <td>{{q.value}}</td>
-              <td>{{q.data_type}}</td>
+              <!--<td>{{q.controller.id}}</td>
+              <td>{{q.actuator.id}}</td> -->
+              <td>{{q.value}} {{q.data_type}}</td>
+              <!--<td>{{q.data_type}}</td> -->
             </tr>
           {% endfor %}
         </table>

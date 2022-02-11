@@ -66,6 +66,8 @@ body {
   margin-bottom: 48px;
   border-top: 0.4px solid #363635;
   justify-content: space-around;
+  align-items: center;
+  
 
 }
 
@@ -136,7 +138,7 @@ body {
   font-family: 'Sarala', sans-serif;
   font-weight: 300;
   font-size: 18px;
-  color: #ECD6C4;
+  color: #1d1c1a;
 }
 
 .border-section {

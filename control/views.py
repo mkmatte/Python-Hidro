@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import *
 from data.models import Sensor
+from data.models import Project
 from .utils import get_plot
 import matplotlib
 import pandas as pd
@@ -13,15 +14,20 @@ class form_Project(forms.Form):
         
 
 def data_sensor(request):
-   
+    print('POST: ',request.POST)
     all_dados = []
-    sensor = Sensor.objects.all()
+    
+    if request.method == 'POST':
+        sensor = Sensor.objects.filter(controller__sector__project__id = request.POST['projeto'])      
+    else:
+        sensor = Sensor.objects.all()
+    projetos = Project.objects.all()
     for s in sensor:
         graphs = []
         dados=[]
         tag_sensor = []
         try:
-            qs = DataSensor.objects.filter(sensor=s.id).order_by('-id')[:30]
+            qs = DataSensor.objects.filter(sensor=s.id).order_by('-id')[:20]
         except:
             qs = DataSensor.objects.filter(sensor=s.id)
         dados.append(qs)
@@ -35,13 +41,18 @@ def data_sensor(request):
         tag_sensor.append(q.sensor.tag_sensor)
         all_dados.append(zip(graphs,dados,tag_sensor))
     print(len(all_dados))
-    return render(request,"main/data_sensor.html",{'all_dados':all_dados})
+    return render(request,"main/data_sensor.html",{'all_dados':all_dados, "projetos": projetos})
 
 
 def data_actuator(request):
 
     all_dados = []
-    actuator = Actuator.objects.all()
+
+    if request.method == 'POST':
+        actuator = Actuator.objects.filter(controller__sector__project__id = request.POST['projeto'])      
+    else:
+        actuator = Actuator.objects.all()
+    projetos = Project.objects.all()
     for s in actuator:
         graphs = []
         dados=[]
@@ -61,7 +72,7 @@ def data_actuator(request):
         tag_actuator.append(q.actuator.tag_actuator)
         all_dados.append(zip(graphs,dados,tag_actuator))
         
-    return render(request,"main/data_actuator.html",{'all_dados':all_dados})    
+    return render(request,"main/data_actuator.html",{'all_dados':all_dados, "projetos": projetos})    
     
     
     
