@@ -29,7 +29,7 @@ urlpatterns = [
     path('home', views.index),
     path('data/', include('control.urls'), name="data"),
     path('admin/', admin.site.urls),
-    #path('monitor/', include('monitor.urls'), name="monitor"),
+    path('monitor/', include('monitor.urls'), name="monitor"),
     path('sensor', include('control.api.urls')),
     path('api_', include('control.api.urls')),
 ]
