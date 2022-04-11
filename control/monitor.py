@@ -88,7 +88,7 @@ def actionActuators(actions):
 
         # data["date_created"] = datetime.datetime.now()
         json = json.dumps(data, indent=4)
-        broker = '192.168.100.100'
+        broker = '127.0.0.1'
         port = 1883
         topic = str(data['controller'])
         client_id = f'server'
