@@ -4,6 +4,7 @@ pip install django-filter
 
 
 pip install django-crontab
+pip install croniter
 python manage.py crontab add
 python manage.py crontab show #mostrar os cron cadastrados
 
