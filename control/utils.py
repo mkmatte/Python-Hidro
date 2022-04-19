@@ -20,7 +20,7 @@ def get_plot(x,y,title,ylabel):
     plt.xticks(rotation=70)
     plt.xlabel('Período')
     plt.ylabel(ylabel)
-    text = "Última Leitura: " + str(y[-1])
+    text = "Última Leitura: " + str(int(y[0])) + ' - Data: ' + str(x[0])
     _x = min(x)
     _y = max(y)
     plt.text(_x, _y, text, size=8, color='red')   
